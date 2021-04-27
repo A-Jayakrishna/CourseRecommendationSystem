@@ -1,11 +1,11 @@
 import pandas as pd 
 import numpy as np
 import os
-import matplotlib.pyplot as plt 
-import altair as alt
+# import matplotlib.pyplot as plt 
+# import altair as alt
 
 from rake_nltk import Rake
-from nltk.corpus import stopwords 
+# from nltk.corpus import stopwords 
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 from flask import Flask,render_template,request,jsonify,session
