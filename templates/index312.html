@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Recommendation System</title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+  <style>
+
+    table{
+      /* border: 3px solid red; */
+      border-collapse: collapse;
+    }
+    /* .col-md-5{
+      overflow-x: scroll;
+
+    } */
+    .card {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.8);
+  padding: 16px;
+  text-align: center;
+  border-radius: 25px;
+  background-color: #f1f1f1;
+}
+body{
+  background: #51abe7;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to top, #FFFFFF, #6DD5FA, #2980B9);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to top, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
+
+
+
+}
+.collapsible {
+  background-color:  #B0E0E6  ;
+  border-radius: 25px;
+  color: black;
+  cursor: pointer;
+  padding: 18px;
+  width: 70%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  margin-left: 167px;
+}
+
+.active, .collapsible:hover {
+  background-color:  #87CEEB ;
+}
+.bokka{
+  max-width: 1200px;
+  margin: auto;
+  background: white;
+  padding: 7px;
+  border-radius: 15px;
+}
+
+.content {
+  width: 804px;
+  display: none;
+  border-radius: 15px;
+  margin-left: 167px;
+  overflow: hidden;
+  background-color: #FFFFE0;
+}
+  </style>
+ </head>
+ <body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">Recommendation System</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        
+      </ul>
+    </ul>
+    <div class="nav navbar-nav navbar-right">
+      <!-- <a href="http://localhost:3000/" class="btn btn-info" style="margin-top: 5px;" target="_blank">Chat for Assistance</a> -->
+      <a href="https://chatapp-react-frontend.herokuapp.com/" class="btn btn-info" style="margin-top: 5px;" target="_blank">Chat for Assistance</a>
+    </div>
+    </div>
+  </nav>
+  <br /><br />
+  <div class="bokka">
+  <div class="container">
+   <br />
+   <h2 align="center">Recommendation System</h2>
+   <br />
+   <div align = "left" class="col-md-4" style="margin-left:200px;">
+    <form action="{{ url_for('ui_course_recommend')}}" method="post" id="single_select_form">
+      <select name="course_selected" id="course_selected" class="form-control selectpicker" data-live-search="true">
+       
+        {% for each in content %}
+        {% if each == selected_course %}
+        <option selected> {{each}} </option>
+        {% else %}
+        <option > {{ each }} </option>
+        {% endif %}
+        {% endfor %}
+
+      
+      <br /><br />
+      <label>Recommend Similar Courses:</label> 
+      <input type="radio" id="yes" name="recommend" value="yes"> <label for="yes">Yes</label>
+      <input type="radio" id="no" name="recommend" value="no"><label for="no">No</label><br>
+ 
+      <input type="hidden" name="skills_chosen" id="skills_chosen" />
+      <input type="submit" name="submit" class="btn btn-primary" value="Submit" />
+     </form>
+    <br />
+   </div>
+  </div>
+
+
+
+  <div class="container1">
+    <br />
+    <br />
+    <!-- <div class="row">
+      {% for i in sim %}
+     <div class="col-md-4">
+     <label>Course Name :- </label>{{i['course_name']}}<br/>
+     <label>Course URL :- </label>{{i['course_url']}}<br/>
+     <label>Learning Product Type :- </label>{{i['learning_product_type']}}<br/>
+     <label>Course Provided By :- </label>{{i['course_provided_by']}}<br/>
+     <label>Course Rating :- </label>{{i['course_rating']}}<br/>
+     <label>Course Skills :- </label>{{i['skills']}}<br/>
+     <label>Course Description :- </label>{{i['description']}}<br/>
+     <label>ETA for Completion :- </label>{{i['estimated_time_to_complete']}}<br/>
+     <label>Course Instructors :- </label>{{i['instructors']}}<br/>
+     </div>
+     {% endfor %}
+      
+    </div> -->
+    <!-- <div class="col-md-5" style="margin-left:200px;">
+     <ul>
+     {% for i in sim %}
+     <li>
+     <label>Course Name :- </label>{{i['course_name']}}<br/>
+     <label>Course URL :- </label>{{i['course_url']}}<br/>
+     <label>Learning Product Type :- </label>{{i['learning_product_type']}}<br/>
+     <label>Course Provided By :- </label>{{i['course_provided_by']}}<br/>
+     <label>Course Rating :- </label>{{i['course_rating']}}<br/>
+     <label>Course Skills :- </label>{{i['skills']}}<br/>
+     <label>Course Description :- </label>{{i['description']}}<br/>
+     <label>ETA for Completion :- </label>{{i['estimated_time_to_complete']}}<br/>
+     <label>Course Instructors :- </label>{{i['instructors']}}<br/>
+    </li>
+     {% endfor %}
+     </ul>
+    </div> -->
+    <ul>
+      {% for i in sim %}
+      <button type="button" class="collapsible"><div class="card">
+        <li>
+          <label>Course Name :- </label>{{i['course_name']}}<br/>
+          <label>Course URL :- </label>{{i['course_url']}}<br/>
+          <label>Learning Product Type :- </label>{{i['learning_product_type']}}<br/>
+          <label>Course Provided By :- </label>{{i['course_provided_by']}}<br/>
+          <label>Course Rating :- </label>{{i['course_rating']}}<br/>
+         </li>
+      </div></button>
+  <div class="content">
+    <li>
+      <label>Course Skills :- </label>{{i['skills']}}<br/>
+      <label>Course Description :- </label>{{i['description']}}<br/>
+      <label>ETA for Completion :- </label>{{i['estimated_time_to_complete']}}<br/>
+      <label>Course Instructors :- </label>{{i['instructors']}}<br/>
+    </li>  
+  </div>
+<br></br>
+      {% endfor %}
+      </ul>
+   </div>
+  </div>
+ </body>
+ <script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+  
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
+  }
+  </script>
+</html>

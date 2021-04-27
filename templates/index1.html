@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Recommendation System</title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+  <style>
+    body {
+  background: url("./static/image/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.bokka{
+  max-width: 800px;
+  background: white;
+  margin-top: 100px;
+  padding: 7px;
+  border-radius: 15px;
+}
+
+  </style>
+ </head>
+ <body >
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Recommendation System</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+        
+      </ul>
+    </ul>
+    <div class="nav navbar-nav navbar-right">
+      <!-- <a href="http://localhost:3000/" class="btn btn-info" style="margin-top: 5px;" target="_blank">Chat for Assistance</a> -->
+      <a href="https://chatapp-react-frontend.herokuapp.com/" class="btn btn-info" style="margin-top: 5px;" target="_blank">Chat for Assistance</a>
+    </div>
+    </div>
+  </nav>
+
+  <br /><br />
+  <div class="container">
+   <br />
+   <h2 align="center">Recommendation System</h2>
+   <br />
+   <div class="bokka" style="margin-left:200px;">
+    <h4>Please select skills for getting Recommendation</h4>
+    <form action="{{ url_for('ajax_add')}}" method="post" id="multiple_select_form">
+     <select name="skills" id="skills" class="form-control selectpicker" data-live-search="true" multiple>
+      
+      {% for each in content %}
+      <option > {{ each }} </option>
+      {% endfor %}
+
+      <!-- <option value="Problem Solving">Problem Solving</option>
+      <option value="Google Container Engine">Google Container Engine</option> -->
+
+     </select>
+     <br /><br />
+     <!-- <label>Recommend Similar Courses:</label> 
+     <input type="radio" id="yes" name="recommend" value="yes"> <label for="yes">Yes</label>
+     <input type="radio" id="no" name="recommend" value="no"><label for="no">No</label><br> -->
+     <!-- Yes <input type="radio" name="recommendation"> No <input type="radio" name="recommendation"><br> -->
+
+     <input type="hidden" name="skills_chosen" id="skills_chosen" />
+     <input type="submit" name="submit" class="btn btn-primary" value="Submit" />
+    </form>
+    <br />
+   </div>
+  </div>
+  <!-- <script>
+    $(document).ready(function(){
+     $('.selectpicker').selectpicker();
+     
+     $('#skills').change(function(){
+      $('#skills_chosen').val($('#skills').val());
+     });
+     
+     $('#multiple_select_form').on('submit', function(event){
+      event.preventDefault();
+      if($('#skills').val() != '')
+      {
+       var form_data = $(this).serialize();
+       $.ajax({
+        url:"/ajax_add",
+        method:"POST",
+        data:form_data,
+        success:function(data)
+        {
+         //console.log(data);
+         $('#skills_chosen').val('');
+         $('.selectpicker').selectpicker('val', '');
+         alert(data);
+        }
+       })
+      }
+      else
+      {
+       alert("Please select framework");
+       return false;
+      }
+     });
+    });
+    </script> -->
+ </body>
+</html>
